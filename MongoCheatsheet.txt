@@ -1,0 +1,18 @@
+Mongo Commands
+
+var personSchema = mongoose.Schema({
+   name: String,
+   age: Number,
+   nationality: String
+});
+var Person = mongoose.model("Person", personSchema);
+
+show collections
+db.createCollection("user")
+db.user.drop()
+
+Types: https://www.tutorialspoint.com/mongodb/mongodb_datatype.htm
+
+db.user.find()
+db.user.find({id:4})
+

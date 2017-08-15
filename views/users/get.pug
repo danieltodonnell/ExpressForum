@@ -1,0 +1,12 @@
+include ./../common/page.pug
+div
+	a(href=`/`) &lt; Home
+h1 All Users
+
+ul
+	each user in userData
+		li
+			a(href=`/users/${user.id}`) #{user.name}	
+a(href='/users/new') + New User
+include ./../common/footer.pug
+		

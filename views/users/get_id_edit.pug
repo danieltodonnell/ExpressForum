@@ -1,0 +1,46 @@
+include ./../common/page.pug
+div
+	a(href="/users") &lt; All Users
+
+h1 User #{userData.id}
+input#id(type="hidden" value=`${userData.id}`)
+p
+	label(for="name") Name: 
+	input#name(value=`${userData.name}` name="name")
+p
+	label(for="handle") Handle: 
+	input#handle(value=`${userData.handle}` name="handle")
+p
+	button.submitBtn #{buttonText}
+
+script.
+
+	let pageType = "#{pageType}";
+
+	function createUser() {
+
+		let payload = {};
+		payload.name = document.getElementById("name").value;
+		payload.handle = document.getElementById("handle").value;
+
+		$.post("new", payload, common.processXhr, "json");
+	}
+
+	function updateUser() {
+
+		let payload = {};
+		payload.id = document.getElementById("id").value;
+		payload.name = document.getElementById("name").value;
+		payload.handle = document.getElementById("handle").value;
+
+		$.post("/users/" + payload.id + "/edit", payload, common.processXhr, "json");
+	}
+
+	function init() {
+		let action = (pageType === "new") ? createUser : updateUser;
+		jQuery(".submitBtn").on("click", action);
+	}
+
+	$(document).ready(init);
+
+include ./../common/footer.pug

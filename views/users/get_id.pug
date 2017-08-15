@@ -1,0 +1,52 @@
+include ./../common/page.pug
+
+div
+	a(href=`/users`) &lt; All Users
+
+h1 User #{userData.id}
+div 
+	p Id: #{userData.id}
+	p Name: #{userData.name}
+	p Handle: #{userData.handle}
+
+a(href=`${userData.id}/edit`) Edit
+
+button.deleteBtn Delete
+button.testBtn Test
+
+script.
+	function deleteUser() {
+
+		let payload = {id: #{userData.id}};
+		$.post("delete", payload, common.processXhr, "json");
+	}
+
+	function showDeleteConfirm() {
+		swal({
+			title: "Confirm",
+			text: "Delete this user?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonText: "Delete"
+		}).then(function () {
+			deleteUser();
+		});
+	}
+
+	function doTest() {
+		$.get("getComponent", null, processComponentHTML);
+	}
+
+	function processComponentHTML(data) {
+		$("body").append(data);
+	}
+
+	function init() {
+		// register click event
+		$(".deleteBtn").on("click", showDeleteConfirm);
+		$(".testBtn").on("click", doTest);
+	}
+
+	$(document).ready(init);
+
+include ./../common/footer.pug

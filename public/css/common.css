@@ -1,0 +1,16 @@
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+.inError {
+	background-color: orange !important;
+}
+
+.inError-marker {
+	color: red;
+	font-size: 12px;
+}
+.inError-marker::before {
+	content: "*";
+	color: red;
+}
